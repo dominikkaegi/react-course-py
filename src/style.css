@@ -1,0 +1,120 @@
+:root {
+  --blue-050: #dceefb;
+  --blue-100: #b6e0fe;
+  --blue-200: #84c5f4;
+  --blue-300: #62b0e8;
+  --blue-400: #4098d7;
+  --blue-500: #2680c2;
+  --blue-600: #186faf;
+  --blue-700: #0f609b;
+  --blue-800: #0a558c;
+  --blue-900: #003e6b;
+
+  --yellow-vivid-050: #fffbea;
+  --yellow-vivid-100: #fff3c4;
+  --yellow-vivid-200: #fce588;
+  --yellow-vivid-300: #fadb5f;
+  --yellow-vivid-400: #f7c948;
+  --yellow-vivid-500: #f0b429;
+  --yellow-vivid-600: #de911d;
+  --yellow-vivid-700: #cb6e17;
+  --yellow-vivid-800: #b44d12;
+  --yellow-vivid-900: #8d2b0b;
+
+  /* // Neutrals */
+  --blue-grey-050: #f0f4f8;
+  --blue-grey-100: #d9e2ec; /* background */
+  --blue-grey-200: #bcccdc;
+  --blue-grey-300: #9fb3c8;
+  --blue-grey-400: #829ab1;
+  --blue-grey-500: #627d98;
+  --blue-grey-600: #486581;
+  --blue-grey-700: #334e68;
+  --blue-grey-800: #243b53;
+  --blue-grey-900: #102a43;
+
+  /* // Supporting */
+  --cyan-050: #e0fcff;
+  --cyan-100: #bef8fd;
+  --cyan-200: #87eaf2;
+  --cyan-300: #54d1db;
+  --cyan-400: #38bec9;
+  --cyan-500: #2cb1bc;
+  --cyan-600: #14919b;
+  --cyan-700: #0e7c86;
+  --cyan-800: #0a6c74;
+  --cyan-900: #044e54;
+
+  --red-050: #ffeeee;
+  --red-100: #facdcd;
+  --red-200: #f29b9b;
+  --red-300: #e66a6a;
+  --red-400: #d64545;
+  --red-500: #ba2525;
+  --red-600: #a61b1b;
+  --red-700: #911111;
+  --red-800: #780a0a;
+  --red-900: #610404;
+
+  --font-color: var(--blue-grey-500);
+  --font-color-inverse: var(--blue-grey-050);
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: var(--blue-grey-500);
+  font-size: 1rem;
+}
+
+.app {
+  height: 100vh;
+}
+
+.btn {
+  padding: 10px;
+  margin: 10px;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--blue-grey-300);
+  color: var(--font-color-inverse);
+}
+
+.cta-btn {
+  background-color: var(--yellow-vivid-300);
+}
+
+.form {
+  border: 1px solid var(--blue-grey-100);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 300px;
+}
+
+.form-text-input {
+  border-style: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: var(--blue-grey-200);
+}
+
+.form-label {
+  margin-bottom: 8px;
+}
+
+.form-element {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.error-text {
+  color: var(--red-300);
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+}
