@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getUsers, createUser, getUserById } from "../../utils/faker_api";
+import { getUsers, createUser, getUserById } from "../../utils/api.user";
 
 export default function UserList() {
   let [users, setUsers] = useState(null);

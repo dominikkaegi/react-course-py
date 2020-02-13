@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createUser } from "../../utils/faker_api";
+import { createUser } from "../../utils/api.user";
 
 let intitalErrors = {
   email: null,

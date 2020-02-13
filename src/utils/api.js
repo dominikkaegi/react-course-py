@@ -2,54 +2,51 @@
 import { sleep, uuid, storage } from "./helpers";
 
 import users from "./users.json";
-import todos from "./todos.json";
 
 async function delay(data) {
   await sleep();
   return data;
 }
 
-export function seedStorage(force) {
-  let usersExists = storage.get("users");
+export function seedStorage(key = "USERS", data = users, force = true) {
+  let usersExists = storage.get(key);
   if (!usersExists || force) {
-    console.log("seeding storage");
-    const seedUsers = () => storage.set("users", users);
-    seedUsers();
+    storage.set(key, data);
   }
 }
 seedStorage();
 
-export async function getUsers() {
-  return getEntity("users");
-}
-export async function getUserById(id) {
-  return getEntityById("users", id);
-}
-export async function createUser({ email, firstName, lastName, avatar }) {
-  let userExists = users.find(item => item.email === email);
-  if (userExists) {
-    throw new Error("User with this e-mail already exists");
-  }
+// export async function getUsers() {
+//   return getEntity("users");
+// }
+// export async function getUserById(id) {
+//   return getEntityById("users", id);
+// }
+// export async function createUser({ email, firstName, lastName, avatar }) {
+//   let userExists = users.find(item => item.email === email);
+//   if (userExists) {
+//     throw new Error("User with this e-mail already exists");
+//   }
 
-  return createEntity("users", {
-    email,
-    firstName,
-    lastName,
-    avatar
-  });
-}
-export async function updateUser({ id, email, firstName, lastName, avatar }) {
-  return updateEntity("users", {
-    id,
-    email,
-    firstName,
-    lastName,
-    avatar
-  });
-}
-export async function deleteUserById(id) {
-  return deleteEntity("users", id);
-}
+//   return createEntity("users", {
+//     email,
+//     firstName,
+//     lastName,
+//     avatar
+//   });
+// }
+// export async function updateUser({ id, email, firstName, lastName, avatar }) {
+//   return updateEntity("users", {
+//     id,
+//     email,
+//     firstName,
+//     lastName,
+//     avatar
+//   });
+// }
+// export async function deleteUserById(id) {
+//   return deleteEntity("users", id);
+// }
 
 //  ----------- DATABASE ---------
 let deepClone = data => {
@@ -58,7 +55,7 @@ let deepClone = data => {
 
 export async function getEntity(entity) {
   return Promise.resolve()
-    .then(() => storage.get(entity))
+    .then(() => storage.get(entity) || [])
     .then(deepClone)
     .then(delay);
 }

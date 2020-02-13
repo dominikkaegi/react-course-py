@@ -5,6 +5,7 @@
   "dependencies": {
     "cra-template": "1.0.1",
     "express": "^4.17.1",
+    "lsbridge": "^0.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-icons": "^3.9.0",

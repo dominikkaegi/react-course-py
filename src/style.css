@@ -56,13 +56,13 @@
   --red-800: #780a0a;
   --red-900: #610404;
 
-  --font-color: var(--blue-grey-500);
+  --font-color: var(--blue-grey-900);
   --font-color-inverse: var(--blue-grey-050);
 }
 
 body {
   font-family: "Roboto", sans-serif;
-  color: var(--blue-grey-500);
+  color: var(--font-color);
   font-size: 1rem;
 }
 
@@ -73,10 +73,10 @@ body {
 .btn {
   padding: 10px;
   margin: 10px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: var(--blue-grey-300);
+  background-color: var(--blue-grey-700);
   color: var(--font-color-inverse);
 }
 
@@ -117,4 +117,9 @@ body {
 .center-element {
   display: flex;
   justify-content: center;
+}
+
+.table-element {
+  width: 90px;
+  text-overflow: ellipsis;
 }

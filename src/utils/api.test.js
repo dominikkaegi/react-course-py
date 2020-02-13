@@ -4,11 +4,11 @@ import {
   createUser,
   updateUser,
   deleteUserById,
-  seedStorage
-} from "./api";
+  seedUsers
+} from "./api.user";
 
 beforeEach(() => {
-  seedStorage();
+  seedUsers();
 });
 
 test("can get users", async () => {
