@@ -4,15 +4,15 @@ import {
   createEntity,
   deleteEntity,
   updateEntity,
-  seedStorage as seed
+  seedStorage
 } from "./api";
 
 import usersData from "./users.json";
 
 const USER_KEY = "USERS";
 
-export async function seedUsers() {
-  seed(USER_KEY, usersData);
+export async function seedUsers(force = false) {
+  seedStorage(USER_KEY, usersData, force);
 }
 
 export async function getUsers() {

@@ -8,13 +8,13 @@ async function delay(data) {
   return data;
 }
 
-export function seedStorage(key = "USERS", data = users, force = true) {
+export function seedStorage(key, data, force = true) {
   let usersExists = storage.get(key);
-  if (!usersExists || force) {
+  console.log(data);
+  if (!usersExists) {
     storage.set(key, data);
   }
 }
-seedStorage();
 
 // export async function getUsers() {
 //   return getEntity("users");

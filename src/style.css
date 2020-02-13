@@ -58,6 +58,7 @@
 
   --font-color: var(--blue-grey-900);
   --font-color-inverse: var(--blue-grey-050);
+  --border-color: var(--blue-grey-100);
 }
 
 body {
@@ -85,7 +86,7 @@ body {
 }
 
 .form {
-  border: 1px solid var(--blue-grey-100);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -119,7 +120,23 @@ body {
   justify-content: center;
 }
 
+.table {
+}
+
+.table-row {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px solid var(--border-color);
+}
+
 .table-element {
-  width: 90px;
+  display: flex;
+  font-size: 1.1rem;
   text-overflow: ellipsis;
+  flex-grow: 1;
+  border: 1px solid red;
+}
+
+.icon {
+  padding: 5px;
 }
