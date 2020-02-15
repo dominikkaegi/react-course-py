@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.2",
     "cra-template": "1.0.1",
     "express": "^4.17.1",
     "lsbridge": "^0.2.0",
