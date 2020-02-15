@@ -11,32 +11,29 @@ import Paper from "@material-ui/core/Paper";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import * as api from "../../utils/api.user";
 
-// const useTitle = title => {
-//   useEffect(() => {
-//     document.title = title;
-//   }, [title]);
-// };
-
 export default function App() {
   let [users, setUsers] = useState([]);
-  let [count, setCount] = useState(0);
 
   useEffect(() => {
+    let isCurrent = true;
     api.getUsers().then((users = []) => {
-      console.log("fetching data");
-      setUsers(users);
+      if (isCurrent) {
+        setUsers(users);
+      }
     });
-  }, []);
+    return () => {
+      isCurrent = false;
+    };
+  }, [users]);
 
-  // useTitle("new page");
-
-  let deleteUser = id => {};
+  let deleteUser = id => {
+    api.deleteUserById(id).then(deletedUser => {
+      setUsers(users.filter(item => item.id !== deletedUser.id));
+    });
+  };
 
   return (
     <div>
-      <h1>Seconds on this page: ${count}s</h1>
-      <button onClick={() => setCount(count + 1)}>Increase Count</button>
-
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>

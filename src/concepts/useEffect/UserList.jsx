@@ -13,21 +13,24 @@ import * as api from "../../utils/api.user";
 
 export default function App() {
   let [users, setUsers] = useState([]);
+  let [count, setCount] = useState(0);
 
   useEffect(() => {
     api.getUsers().then((users = []) => {
+      console.log("fetching data");
       setUsers(users);
     });
-  }, [users]);
+  }, []);
 
-  let deleteUser = id => {
-    api.deleteUserById(id).then(deletedUser => {
-      setUsers(users.filter(item => item.id !== deletedUser.id));
-    });
-  };
+  // useTitle("new page");
+
+  let deleteUser = id => {};
 
   return (
     <div>
+      <h1>Seconds on this page: ${count}s</h1>
+      <button onClick={() => setCount(count + 1)}>Increase Count</button>
+
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
