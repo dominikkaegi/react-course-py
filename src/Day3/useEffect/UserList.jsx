@@ -11,14 +11,24 @@ import Paper from "@material-ui/core/Paper";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import * as api from "../../utils/api.user";
 
+// const useTitle = title => {
+//   useEffect(() => {
+//     document.title = title;
+//   }, [title]);
+// };
+
 export default function App() {
   let [users, setUsers] = useState([]);
   let [count, setCount] = useState(0);
 
-  api.getUsers().then((users = []) => {
-    console.log("fetching data");
-    setUsers(users);
-  });
+  useEffect(() => {
+    api.getUsers().then((users = []) => {
+      console.log("fetching data");
+      setUsers(users);
+    });
+  }, []);
+
+  // useTitle("new page");
 
   let deleteUser = id => {};
 
