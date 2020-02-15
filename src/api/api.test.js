@@ -7,8 +7,9 @@ import {
   seedUsers
 } from "./api.user";
 
-beforeEach(() => {
-  seedUsers();
+beforeEach(async done => {
+  await seedUsers(true);
+  done();
 });
 
 test("can get users", async () => {
@@ -41,7 +42,7 @@ test("can create user", async () => {
   expect(users.length).toBe(7);
 });
 
-test("can create user", async () => {
+test("can't create user twice", async () => {
   let userData = {
     email: "test@gmail.com",
     firstName: "firstName",

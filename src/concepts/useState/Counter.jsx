@@ -1,6 +1,5 @@
 import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa";
-
 // Counter
 // When clicking on Add the counter should increase by one.
 // When clicking on Subtract the counter should decrease by one.
