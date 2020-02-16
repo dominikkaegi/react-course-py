@@ -9,9 +9,8 @@ import Feed from "./Feed";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(9),
     padding: theme.spacing(5),
-    minHeight: "80vh"
+    minHeight: "100vh"
   }
 }));
 

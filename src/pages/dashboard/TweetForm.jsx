@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 export default function TweetForm() {
   const classes = useStyles();
   const [message, setMessage] = useState("");
+  const [disableAction, setDisableAction] = useState(false);
 
   const [user, setUser] = useState(null);
 
@@ -31,7 +32,13 @@ export default function TweetForm() {
   }, []);
 
   const handleCreateTweet = () => {
-    createTweet({ message, user });
+    if (message.length === 0) return;
+
+    setDisableAction(true);
+    createTweet({ message, user }).then(() => {
+      setMessage("");
+      setDisableAction(false);
+    });
   };
 
   const MESSAGE_LIMIT = 280;
@@ -73,7 +80,7 @@ export default function TweetForm() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={message.length > MESSAGE_LIMIT}
+            disabled={message.length > MESSAGE_LIMIT || disableAction}
             onClick={handleCreateTweet}
           >
             Tweet

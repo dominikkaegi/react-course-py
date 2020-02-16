@@ -1,11 +1,11 @@
 import React from "react";
 
-import Tweeter from "../src/Tweeter";
+import Twitter from "./Twitter";
 
 function App() {
   return (
     <div className="App">
-      <Tweeter />
+      <Twitter />
     </div>
   );
 }

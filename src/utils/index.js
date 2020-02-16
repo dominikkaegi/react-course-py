@@ -1,12 +1,17 @@
 import * as userApi from "api/api.user";
 import * as apiTweet from "api/apit.tweet";
+import * as authApi from "api/api.auth";
 
 export async function signup({ firstName, lastName, email, password }) {
-  return userApi.signup({ firstName, lastName, email, password });
+  return authApi.signup({ firstName, lastName, email, password });
 }
 
 export async function login({ email, password }) {
-  return userApi.login({ email, password });
+  return authApi.login({ email, password });
+}
+
+export async function logout() {
+  return authApi.logout();
 }
 
 export async function getActiveUser() {
