@@ -29,7 +29,7 @@ export function createEntity(entity, data) {
     createdAt: JSON.stringify(new Date())
   };
 
-  let items = storage.get(entity);
+  let items = storage.get(entity) || [];
   items.push(newEntity);
   storage.set(entity, items);
 

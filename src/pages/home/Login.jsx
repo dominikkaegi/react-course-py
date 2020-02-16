@@ -6,6 +6,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import { useHistory } from "react-router-dom";
+
+import { login } from "utils";
+
 const useStyles = makeStyles(theme => ({
   avatar: {
     margin: theme.spacing(1),
@@ -22,14 +26,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login() {
   const classes = useStyles();
+  const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
+  const [input, setInput] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({ loginError: null });
 
-  const handlePassword = () => {
+  const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
+
+    const { email, password } = input;
+    try {
+      await login({ email, password });
+      history.push("/dashboard");
+    } catch (err) {
+      setErrors({ ...errors, loginError: err.message });
+    }
   };
 
   return (
@@ -46,6 +61,8 @@ export default function Login() {
             name="email"
             autoComplete="email"
             autoFocus
+            value={input.email}
+            onChange={e => setInput({ ...input, email: e.target.value })}
           />
           <TextField
             variant="outlined"
@@ -57,12 +74,14 @@ export default function Login() {
             type={showPassword ? "text" : "password"}
             id="password"
             autoComplete="current-password"
+            value={input.password}
+            onChange={e => setInput({ ...input, password: e.target.value })}
           />
           <FormControlLabel
             control={
               <Checkbox
                 value={showPassword}
-                onChange={() => handlePassword()}
+                onChange={() => handleShowPassword()}
                 color="primary"
               />
             }
@@ -79,15 +98,17 @@ export default function Login() {
           </Button>
         </form>
       </div>
-      {/* <pre>
+      <pre>
         {JSON.stringify(
           {
+            input,
+            errors,
             showPassword
           },
           null,
           2
         )}
-      </pre> */}
+      </pre>
     </Container>
   );
 }

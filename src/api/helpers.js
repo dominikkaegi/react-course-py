@@ -20,3 +20,45 @@ export const storage = {
     return window.localStorage.setItem(entity, value);
   }
 };
+
+function pubSub() {
+  const subscribers = {};
+
+  function publish(eventName, data) {
+    console.log(`
+      Chanel: ${eventName}
+      Published: ${JSON.stringify(data)}
+    `);
+    if (!Array.isArray(subscribers[eventName])) {
+      return;
+    }
+    subscribers[eventName].forEach(callback => {
+      callback(data);
+    });
+  }
+
+  function subscribe(eventName, callback) {
+    if (!callback) {
+      throw new Error("Callback required for subscribe(eventName, callback)");
+    }
+
+    if (!Array.isArray(subscribers[eventName])) {
+      subscribers[eventName] = [];
+    }
+    subscribers[eventName].push(callback);
+
+    const unsubscribe = () => {
+      subscribers[eventName] = subscribers[eventName].filter(cb =>
+        cb === callback ? false : true
+      );
+    };
+
+    return unsubscribe;
+  }
+
+  return {
+    publish,
+    subscribe
+  };
+}
+export const pubsub = pubSub();

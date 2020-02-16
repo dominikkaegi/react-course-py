@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useHistory } from "react-router-dom";
+
 import { signup } from "utils";
 
 const useStyles = makeStyles(theme => ({
@@ -33,20 +35,21 @@ export default function SignUp() {
     email: "",
     password: ""
   });
+  const history = useHistory();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email, password } = input;
 
     try {
-      signup({ firstName, lastName, email, password }).then(user => {
-        console.log("signup successful");
-      });
+      await signup({ firstName, lastName, email, password });
+      history.push("/dashboard");
     } catch (err) {
+      console.log(err.message);
       setErrors({ errors, signupError: err.message });
     }
   };
