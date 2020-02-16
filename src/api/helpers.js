@@ -25,10 +25,6 @@ function pubSub() {
   const subscribers = {};
 
   function publish(eventName, data) {
-    console.log(`
-      Chanel: ${eventName}
-      Published: ${JSON.stringify(data)}
-    `);
     if (!Array.isArray(subscribers[eventName])) {
       return;
     }

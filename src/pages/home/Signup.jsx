@@ -129,7 +129,7 @@ export default function SignUp() {
             Sign Up
           </Button>
         </form>
-        <pre>{JSON.stringify({ input, errors }, null, 2)}</pre>
+        {/* <pre>{JSON.stringify({ input, errors }, null, 2)}</pre> */}
       </div>
     </Container>
   );

@@ -1,9 +1,18 @@
 import { pubsub } from "./helpers";
-import { createEntity, getEntity } from "./api";
+import tweetsData from "./data/tweets";
+import { createEntity, getEntity, seedStorage } from "./api";
 
 const TWEET_KEY = "TWEET_KEY";
-
 const NEW_TWEET = "NEW_TWEET";
+
+// ----- UTILITIES -----
+
+export async function seedTweets(force = false) {
+  seedStorage(TWEET_KEY, tweetsData, force);
+}
+seedTweets();
+
+// ----- API -----
 
 export async function create({ message, user }) {
   let tweet = {
@@ -19,7 +28,8 @@ export async function create({ message, user }) {
 
 export async function getTweets() {
   let tweets = getEntity(TWEET_KEY);
-  return tweets;
+  let orderedTweets = tweets.reverse();
+  return orderedTweets;
 }
 
 export function subscribe(cb) {

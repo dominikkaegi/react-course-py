@@ -80,7 +80,6 @@ export default function TweetForm() {
           </Button>
         </Grid>
       </Grid>
-      {/* <pre>{JSON.stringify(user, null, 2)}</pre> */}
     </Fragment>
   );
 }

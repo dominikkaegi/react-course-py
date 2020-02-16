@@ -2,8 +2,8 @@
 import { uuid, storage } from "./helpers";
 
 export function seedStorage(key, data, force = true) {
-  let usersExists = storage.get(key);
-  if (!usersExists) {
+  let dataExists = storage.get(key);
+  if (!dataExists) {
     storage.set(key, data);
   }
 }
@@ -12,6 +12,15 @@ export function seedStorage(key, data, force = true) {
 let deepClone = data => {
   return JSON.parse(JSON.stringify(data));
 };
+
+export function setSingleEntity(entity, data) {
+  storage.set(entity, data);
+  return data;
+}
+export function getSingleEntity(entity) {
+  return storage.get(entity);
+}
+
 export function getEntity(entity) {
   let data = storage.get(entity) || [];
   return deepClone(data);
@@ -26,7 +35,7 @@ export function createEntity(entity, data) {
   let newEntity = {
     ...data,
     id: uuid(),
-    createdAt: JSON.stringify(new Date())
+    createdAt: new Date()
   };
 
   let items = storage.get(entity) || [];
