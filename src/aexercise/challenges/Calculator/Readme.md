@@ -16,7 +16,8 @@ Add the functionality of clear "C", delete "DEL" and percentage "%". When pressi
 Bonus Task (recommended, not essential):
 
 Add the logic for the operations of addition, subbtraction, multiplication and division. It can take a little time to get around how the whole thing should work. To understand the logic behind a calculator it can be of benefit to google for the state machine of an calculator (keyword: pending operation).
-The way of grading:
+
+### The way of grading:
 
 You need to use a reusable component which can be modified within project.
 It must be possible to enter numbers and the functionality of clear, delete and percentage.

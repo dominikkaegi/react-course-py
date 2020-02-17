@@ -8,6 +8,10 @@ Sometime when we update a lot of different states within our application it can 
 
 Rebuild the calculator we built in the first calculcator challenge with the useReducer hook. Move the logic for state updates into the reducer to clear up your UI from app logic.
 
+### The way of grading:
+
+Have you moved to logic concerning state changes towards the reducer?
+
 ### Restrictions:
 
-Use the useReducer hook from react and move all state changes to the reducer.
+Logic for state changes must be handled by using the useReducer hook.
