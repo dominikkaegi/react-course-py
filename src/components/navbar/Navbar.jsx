@@ -5,7 +5,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { logout } from "utils";
 
@@ -18,6 +18,10 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flexGrow: 1
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none"
   }
 }));
 
@@ -34,9 +38,13 @@ export default function ButtonAppBar() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Twitter
+            <Link to="/dashboard" className={classes.link}>
+              Twitter
+            </Link>
           </Typography>
-          <Button color="inherit">Profile</Button>
+          <Link to="/profile" className={classes.link}>
+            <Button color="inherit">Profile</Button>
+          </Link>
           <Button onClick={handleLogout} color="inherit">
             Logout
           </Button>

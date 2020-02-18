@@ -1,12 +1,18 @@
 import usersData from "./data/users.json";
-import { getEntity, createEntity, getSingleEntity, seedStorage } from "./api";
+import {
+  getEntity,
+  createEntity,
+  getSingleEntity,
+  seedStorage,
+  getEntityById
+} from "./api";
 
 const USER_KEY = "USERS";
 const ACTIVE_USER = "ACTIVE_USER";
 
 // -------- UTILTIES ---------
 
-export async function seedUsers(force = false) {
+export function seedUsers(force = false) {
   seedStorage(USER_KEY, usersData, force);
 }
 seedUsers();
@@ -21,19 +27,13 @@ export function getUsersWithPassword() {
 
 // -------- API ---------
 
-export async function getUsers() {
+export function getUsers() {
   const users = getEntity(USER_KEY);
   const passwordLessUsers = users.map(removePassword);
   return passwordLessUsers;
 }
 
-export async function createUser({
-  email,
-  firstName,
-  lastName,
-  avatar,
-  password
-}) {
+export function createUser({ email, firstName, lastName, avatar, password }) {
   const user = createEntity(USER_KEY, {
     email,
     firstName,
@@ -44,8 +44,17 @@ export async function createUser({
   return user;
 }
 
-export async function getActiveUser() {
+export function getActiveUser() {
   return getSingleEntity(ACTIVE_USER);
+}
+
+export function getUserById(id) {
+  try {
+    return getEntityById(USER_KEY, id);
+  } catch (error) {
+    console.log(error);
+  }
+  return;
 }
 
 // export async function updateUser({ id, email, firstName, lastName, avatar }) {
@@ -59,14 +68,6 @@ export async function getActiveUser() {
 // }
 // export async function deleteUserById(id) {
 //   return deleteEntity(USER_KEY, id);
-// }
-// export async function getUserById(id) {
-//   try {
-//     return getEntityById(USER_KEY, id);
-//   } catch (error) {
-//     console.log(error());
-//   }
-//   return;
 // }
 
 // export async function signup({ email, firstName, lastName, password }) {

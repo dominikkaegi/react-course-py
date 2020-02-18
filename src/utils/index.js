@@ -2,6 +2,10 @@ import * as userApi from "api/api.user";
 import * as apiTweet from "api/apit.tweet";
 import * as authApi from "api/api.auth";
 
+export async function getUsers() {
+  return userApi.getUsers();
+}
+
 export async function signup({ firstName, lastName, email, password }) {
   return authApi.signup({ firstName, lastName, email, password });
 }
@@ -16,6 +20,10 @@ export async function logout() {
 
 export async function getActiveUser() {
   return userApi.getActiveUser();
+}
+
+export async function getUserById(id) {
+  return userApi.getUserById(id);
 }
 
 export async function createTweet({ message, user }) {

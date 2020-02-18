@@ -18,7 +18,7 @@ export function authSubscribe(cb) {
 }
 
 export async function login({ email, password }) {
-  let users = await getUsersWithPassword();
+  let users = getUsersWithPassword();
   let user = users.find(item => item.email === email);
   if (!user) {
     throw new Error("Invalid user or password");
@@ -35,7 +35,7 @@ export async function login({ email, password }) {
 }
 
 export async function signup({ email, firstName, lastName, password }) {
-  let users = await getUsersWithPassword();
+  let users = getUsersWithPassword();
   let userExists = users.find(item => item.email === email);
   if (userExists) {
     throw new Error("User with this e-mail already exists");
@@ -46,7 +46,7 @@ export async function signup({ email, firstName, lastName, password }) {
   const defaultAvatar =
     "https://static1.squarespace.com/static/54b7b93ce4b0a3e130d5d232/54e20ebce4b014cdbc3fd71b/5a992947e2c48320418ae5e0/1519987239570/icon.png";
 
-  const user = await createUser({
+  const user = createUser({
     email,
     firstName,
     lastName,
