@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -6,10 +6,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { useHistory } from "react-router-dom";
-
-import { signup } from "utils";
 
 const useStyles = makeStyles(theme => ({
   avatar: {
@@ -27,37 +23,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ signupError: null });
-  const [input, setInput] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  });
-  const history = useHistory();
-
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleSubmit = async event => {
-    event.preventDefault();
-    const { firstName, lastName, email, password } = input;
-
-    try {
-      await signup({ firstName, lastName, email, password });
-      history.push("/dashboard");
-    } catch (err) {
-      console.log(err.message);
-      setErrors({ errors, signupError: err.message });
-    }
-  };
 
   return (
     <Container component="main" maxWidth="xs">
       <div>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -69,9 +39,6 @@ export default function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                onChange={e =>
-                  setInput({ ...input, firstName: e.target.value })
-                }
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -83,7 +50,6 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
-                onChange={e => setInput({ ...input, lastName: e.target.value })}
               />
             </Grid>
             <Grid item xs={12}>
@@ -95,7 +61,6 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={e => setInput({ ...input, email: e.target.value })}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,17 +70,15 @@ export default function SignUp() {
                 fullWidth
                 name="password"
                 label="Password"
-                type={showPassword ? "text" : "password"}
+                type={"password"}
                 id="password"
                 autoComplete="current-password"
-                onChange={e => setInput({ ...input, password: e.target.value })}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value={showPassword} color="primary" />}
+                control={<Checkbox color="primary" />}
                 label="Show Password"
-                onChange={handleShowPassword}
               />
             </Grid>
           </Grid>
@@ -129,7 +92,6 @@ export default function SignUp() {
             Sign Up
           </Button>
         </form>
-        {/* <pre>{JSON.stringify({ input, errors }, null, 2)}</pre> */}
       </div>
     </Container>
   );

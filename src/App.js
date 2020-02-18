@@ -1,13 +1,13 @@
 import React from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Twitter from "./Twitter";
+import Home from "pages/home/Home";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Twitter />
+    <div>
+      <CssBaseline />
+      <Home />
     </div>
   );
 }
-
-export default App;
