@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
 export default function ProfileDisplay(props) {
   const classes = useStyles();
   const { editable, user } = props;
-  console.log(props);
 
   const action = editable ? (
     <IconButton aria-label="settings">

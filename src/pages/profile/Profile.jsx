@@ -35,7 +35,6 @@ export default function Profile() {
       });
     } else {
       getActiveUser().then(user => {
-        console.log(user);
         if (isCurrent) {
           setUser(user);
         }

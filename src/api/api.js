@@ -26,9 +26,7 @@ export function getEntity(entity) {
   return deepClone(data);
 }
 export function getEntityById(entity, id) {
-  console.log(id);
   let entities = storage.get(entity);
-  console.log(entities);
   const data = entities.find(item => item.id === id);
   if (!data) throw new Error("User not found");
   return data;

@@ -83,7 +83,6 @@ export default function SignUp() {
       await signup({ firstName, lastName, email, password });
       history.push("/dashboard");
     } catch (err) {
-      console.log(err.message);
       setErrors({ errors, email: err.message });
     }
   };
