@@ -5,8 +5,6 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -28,17 +26,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function ProfileDisplay(props) {
   const classes = useStyles();
-  const { editable, user } = props;
-
-  const action = editable ? (
-    <IconButton aria-label="settings">
-      <EditIcon />
-    </IconButton>
-  ) : null;
+  const { user } = props;
 
   return (
     <Card style={{ margin: "10px" }}>
-      <CardHeader action={action} />
+      <CardHeader />
       <CardContent>
         <div className={classes.centerContent}>
           <Avatar className={classes.avatar} src={user.avatar}>
