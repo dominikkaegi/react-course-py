@@ -9,7 +9,7 @@ import Dashboard from "pages/dashboard/Dashboard";
 import Navbar from "components/navbar/Navbar";
 import Profile from "pages/profile/Profile";
 
-export default function Tweeter() {
+export default function Twitter() {
   return (
     <div>
       <CssBaseline />
