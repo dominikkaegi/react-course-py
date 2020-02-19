@@ -81,7 +81,6 @@ export default function Login() {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
             label="Email Address"
@@ -96,7 +95,6 @@ export default function Login() {
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             name="password"
             label="Password"
@@ -130,17 +128,6 @@ export default function Login() {
           </Button>
         </form>
       </div>
-      <pre>
-        {JSON.stringify(
-          {
-            input,
-            errors,
-            showPassword
-          },
-          null,
-          2
-        )}
-      </pre>
     </Container>
   );
 }

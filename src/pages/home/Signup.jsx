@@ -25,10 +25,17 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const INITIAL_ERRORS = {
+  firstName: null,
+  lastName: null,
+  email: null,
+  password: null
+};
+
 export default function SignUp() {
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ signupError: null });
+  const [errors, setErrors] = useState(INITIAL_ERRORS);
   const [input, setInput] = useState({
     firstName: "",
     lastName: "",
@@ -41,16 +48,43 @@ export default function SignUp() {
     setShowPassword(!showPassword);
   };
 
+  const validate = ({ firstName, lastName, email, password }) => {
+    let isValid = true;
+
+    const validationErrors = { ...INITIAL_ERRORS }; // copy to not overwrite original object
+    if (firstName.length < 1) {
+      validationErrors.firstName = "First name required";
+      isValid = false;
+    }
+    if (lastName.length < 1) {
+      validationErrors.lastName = "Las name required";
+      isValid = false;
+    }
+    if (email.length < 1) {
+      validationErrors.email = "Email required";
+      isValid = false;
+    }
+    if (password.length < 4) {
+      validationErrors.password = "Password must have a length of 4";
+      isValid = false;
+    }
+    setErrors(validationErrors);
+    return isValid;
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
     const { firstName, lastName, email, password } = input;
+
+    const isValid = validate({ firstName, lastName, email, password });
+    if (!isValid) return;
 
     try {
       await signup({ firstName, lastName, email, password });
       history.push("/dashboard");
     } catch (err) {
       console.log(err.message);
-      setErrors({ errors, signupError: err.message });
+      setErrors({ errors, email: err.message });
     }
   };
 
@@ -64,7 +98,6 @@ export default function SignUp() {
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
-                required
                 fullWidth
                 id="firstName"
                 label="First Name"
@@ -72,36 +105,39 @@ export default function SignUp() {
                 onChange={e =>
                   setInput({ ...input, firstName: e.target.value })
                 }
+                error={!!errors.firstName}
+                helperText={errors.firstName}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 id="lastName"
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
                 onChange={e => setInput({ ...input, lastName: e.target.value })}
+                error={!!errors.lastName}
+                helperText={errors.lastName}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 onChange={e => setInput({ ...input, email: e.target.value })}
+                error={!!errors.email}
+                helperText={errors.email}
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
                 fullWidth
                 name="password"
                 label="Password"
@@ -109,8 +145,11 @@ export default function SignUp() {
                 id="password"
                 autoComplete="current-password"
                 onChange={e => setInput({ ...input, password: e.target.value })}
+                error={!!errors.password}
+                helperText={errors.password}
               />
             </Grid>
+            <div style={{ color: "red" }}>{errors.signup}</div>
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value={showPassword} color="primary" />}
@@ -129,7 +168,6 @@ export default function SignUp() {
             Sign Up
           </Button>
         </form>
-        {/* <pre>{JSON.stringify({ input, errors }, null, 2)}</pre> */}
       </div>
     </Container>
   );
