@@ -24,26 +24,53 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const INITAL_ERRORS = {
+  email: null,
+  password: null,
+  login: null
+};
+
 export default function Login() {
   const classes = useStyles();
   const history = useHistory();
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ loginError: null });
+  const [errors, setErrors] = useState(INITAL_ERRORS);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
+  const validate = ({ email, password }) => {
+    let isValid = true;
+
+    let validationErrors = { ...INITAL_ERRORS }; // copy errors so that we don't overwrite the default erros
+    // Feel free to add more complex validation with Regular Expressions
+    if (email.length === 0 || !email.includes("@")) {
+      validationErrors.email = "Not a valid E-mail";
+      isValid = false;
+    }
+    if (password.length < 2) {
+      validationErrors.password = "Password is too short";
+      isValid = false;
+    }
+    setErrors({ ...validationErrors });
+
+    return isValid;
+  };
+
   const handleSubmit = async event => {
     event.preventDefault();
-
     const { email, password } = input;
+
+    const isValid = validate({ email, password });
+    if (!isValid) return;
+
     try {
       await login({ email, password });
       history.push("/dashboard");
     } catch (err) {
-      setErrors({ ...errors, loginError: err.message });
+      setErrors({ ...errors, login: err.message });
     }
   };
 
@@ -63,6 +90,8 @@ export default function Login() {
             autoFocus
             value={input.email}
             onChange={e => setInput({ ...input, email: e.target.value })}
+            error={!!errors.email}
+            helperText={errors.email}
           />
           <TextField
             variant="outlined"
@@ -76,6 +105,8 @@ export default function Login() {
             autoComplete="current-password"
             value={input.password}
             onChange={e => setInput({ ...input, password: e.target.value })}
+            error={!!errors.password}
+            helperText={errors.password}
           />
           <FormControlLabel
             control={
@@ -87,6 +118,7 @@ export default function Login() {
             }
             label="Show password"
           />
+          <div style={{ color: "red" }}>{errors.login}</div>
           <Button
             type="submit"
             fullWidth
