@@ -12,26 +12,6 @@ import { subscribeToNewTweets, getTweets, formatDate } from "utils";
 export default function Feed() {
   const [tweets, setTweets] = useState([]);
 
-  useEffect(() => {
-    let isCurrent = true;
-    getTweets().then(data => {
-      if (isCurrent) {
-        setTweets(data);
-      }
-    });
-    return () => {
-      isCurrent = false;
-    };
-  }, []);
-
-  useEffect(() => {
-    let unsub = subscribeToNewTweets(data => {
-      const { new: newTweet } = data;
-      setTweets([newTweet, ...tweets]);
-    });
-    return unsub;
-  }, [tweets]);
-
   return (
     <div>
       <h1>Feed</h1>
