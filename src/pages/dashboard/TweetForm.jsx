@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import Avatar from "@material-ui/core/Avatar";
@@ -6,7 +6,9 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
-// import { createTweet, getActiveUser } from "utils";
+import { Link } from "react-router-dom";
+
+import { createTweet, getActiveUser } from "utils";
 
 const useStyles = makeStyles(theme => ({
   tweet: {
@@ -22,8 +24,28 @@ export default function TweetForm() {
   const classes = useStyles();
   const [message, setMessage] = useState("");
   const [user, setUser] = useState(null);
+  const [disable, setDisable] = useState(false);
 
-  const handleCreateTweet = () => {};
+  const handleCreateTweet = () => {
+    setDisable(true);
+    createTweet({ message, user }).then(tweet => {
+      setDisable(false);
+      setMessage("");
+    });
+  };
+
+  useEffect(function() {
+    let isCurrent = true;
+    getActiveUser().then(user => {
+      if (isCurrent) {
+        setUser(user);
+      }
+    });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
 
   const MESSAGE_LIMIT = 280;
 
@@ -64,7 +86,9 @@ export default function TweetForm() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            disabled={message.length > MESSAGE_LIMIT}
+            disabled={
+              message.length > MESSAGE_LIMIT || message.length === 0 || disable
+            }
             onClick={handleCreateTweet}
           >
             Tweet

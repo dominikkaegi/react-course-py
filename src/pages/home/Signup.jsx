@@ -7,6 +7,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useHistory } from "react-router-dom";
+
 import { signup } from "utils";
 
 const useStyles = makeStyles(theme => ({
@@ -40,6 +42,7 @@ export default function SignUp() {
     email: "",
     password: ""
   });
+  const history = useHistory();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -78,7 +81,7 @@ export default function SignUp() {
 
     signup({ firstName, lastName, email, password })
       .then(() => {
-        console.log("go to /dashboard");
+        history.push("/dashboard");
       })
       .catch(err => {
         setErrors({ errors, email: err.message });

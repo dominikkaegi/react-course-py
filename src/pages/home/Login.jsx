@@ -6,6 +6,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import { useHistory } from "react-router-dom";
+
 import { login } from "utils";
 
 const useStyles = makeStyles(theme => ({
@@ -33,6 +35,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState(INITAL_ERRORS);
+  const history = useHistory();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -65,7 +68,7 @@ export default function Login() {
 
     login({ email, password })
       .then(() => {
-        console.log("redirect to dashboards");
+        history.push("/dashboard");
       })
       .catch(err => {
         setErrors({ ...errors, login: err.message });
